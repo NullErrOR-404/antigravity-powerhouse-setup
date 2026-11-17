@@ -62,8 +62,9 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - If errors or bug reports occur: Automatically invoke `systematic-debugging` (root-cause diagnosis before touching code).
   - If writing new business logic: Automatically invoke `test-driven-development` (red-green-refactor).
   - If planning or orchestrating multi-task feature sets: Automatically hook into `subagent-driven-development` or `to-spec` / `to-tickets`.
-- **Security & Authorization**:
-  - Whenever auth, JWTs, sessions, sensitive endpoints, or pre-PR gates are touched: Automatically invoke `find-security-vulnerabilities-in-code` and `owasp-top-10-testing` to verify zero exploitability.
+- **Security, Authorization & Red-Hat Hardening**:
+  - Whenever auth, JWTs, sessions, sensitive endpoints, or pre-PR/pre-ship gates are touched: Automatically invoke `redhat-appsec-hardening`, `find-security-vulnerabilities-in-code`, and `owasp-top-10-testing`.
+  - Enforce the 5-Stage Defensive Security Funnel: Threat-model by niche, audit BOLA/IDOR on all queries, verify Server Action session validation, ensure HMAC raw webhook signatures, prevent data over-fetching, and apply surgical boundary patches before generating the final Security Scorecard.
 - **Custom Tooling / External Integrations**:
   - Whenever connecting new APIs or services: Automatically hook into `mcp-builder`.
 - **Documents & Spreadsheets**:
