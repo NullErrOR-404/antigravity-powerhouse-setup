@@ -155,6 +155,14 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - **Authentic Grounded Data**: Never use round placeholder dummy data (`$100.00`, `John Doe`, generic corporate stock photos). Use realistic edge-case domain data: localized currencies, negative percentages, real filenames with extensions, and real product UI captures.
   - **Luminance-Based Dark Mode Elevation**: Never use pure black (`#000000`) or dead grey (`#121212`) backgrounds. Tint dark surfaces with 2–4% brand hue. Express depth through rising luminance tiers (Background 8% L ➔ Cards 13% L ➔ Popovers 18% L) paired with subtle 1px top alpha highlights (`rgb(255 255 255 / 0.08)`).
   - **Tactile Physics & Micro-States**: Every clickable button must have `:active { transform: scale(0.97); }`. Hover states must never be instant or jarring (`transition: all 150ms cubic-bezier(0.23, 1, 0.32, 1)`). Tooltips must have a mandatory 150ms hover delay to prevent cursor strobing. Skeleton screens must pulse with an OKLCH gradient and match destination geometry.
+  - **Optical Focus Rings & Accessibility**: Never use raw `outline: none`. Interactive elements must feature an optical focus ring: `focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 focus-visible:outline-none` with smooth 150ms transition.
+  - **High-Converting Empty States**: Forbid lifeless *"No items found"* messages. Empty states must render a low-opacity ghost preview of populated destination data paired with a single, frictionless primary action button (e.g. *"Create First Invoice"* with sample data prefill).
+  - **The 5 Niche Aesthetic Archetypes (Automatic Adaptation)**:
+    1. *FinTech / Security / DevTools*: High data density, OLED dark mode, mono accents, tabular numbers (`tabular-nums`), cyan/slate tinted neutrals.
+    2. *E-Commerce & Fashion / Lifestyle*: Generous whitespace (`py-28`), warm stone/sand tinted neutrals, editorial high-contrast headlines, large product framing.
+    3. *Healthcare & Medical*: Trust-blue / sage accents, clean high-legibility sans-serif, strict $\ge 7:1$ contrast ratio, zero playful spring bounce.
+    4. *Luxury & High-End Real Estate*: Deep obsidian surfaces, subtle bronze/gold alpha strokes (`rgb(212 175 55 / 0.15)`), serif display titles, unhurried 350-400ms choreographies.
+    5. *Productivity & B2B SaaS*: Minimalist Swiss design, dense information architecture, 100% keyboard shortcut coverage, quiet chrome with high-impact data visualizations.
 - **Laws of UX & Human Psychology (Niche Cognitive Grounding)**:
   - **Doherty Threshold**: Interfaces must respond to user input within `< 400ms` (instant optimistic UI feedback before network round trips).
   - **Fitts's Law & Hit Targets**: Clickable hit areas must be at least `44x44px` even if the visible icon is smaller (`position: relative` with an invisible `::after` padding expander).
