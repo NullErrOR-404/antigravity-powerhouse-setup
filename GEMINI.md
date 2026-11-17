@@ -1,4 +1,4 @@
-﻿# Antigravity Global Agent Operating Invariants
+# Antigravity Global Agent Operating Invariants
 
 This file establishes the mandatory operational rules, cognitive disciplines, and communication standards for Antigravity across all workspaces. These rules are active on every turn and override default model tendencies.
 
@@ -48,13 +48,17 @@ The agent must proactively monitor session length and guide the user at natural 
 
 The agent must **NOT rely solely on literal keywords**. Analyze the **deep intent and content structure** of every prompt to automatically hook into installed skills:
 
+### The Mandatory "Read-Before-Write" Anti-Hallucination Gate
+- **Zero Blind Code Generation**: The agent is physically forbidden from generating UI components, styling, API handlers, or database models from general model assumptions.
+- **Mandatory Grounding Step**: Before writing code for any feature, the agent MUST explicitly query or read the relevant domain skill (e.g. running `python .../ui-ux-pro-max/scripts/search.py "<niche>"` for design tokens and color schemes, reading `file-storage` before handling uploads, reading `resend-email` before dispatching messages). Writing code without grounding is an immediate operational breach.
+
 ### Content Pattern ➔ Automatic Skill Hook:
 - **Visual, Layout, Styling, or Component Work**:
   - Automatically load `ui-ux-pro-max` (palettes & tokens), `impeccable` (craft floor & bans), and `emil-design-eng` / `choreograph` (micro-interactions & motion).
   - If building marketing or landing pages: Automatically enforce `taste-skill` (one section per screen, authentic visuals, no generic templates).
   - If polishing messy/AI-generated screens: Automatically apply `unslop` (strip purple blobs, emoji badges, quiet chrome).
 - **Code Logic, Feature Implementation & Refactoring**:
-  - Always enforce `Surgical Minimal-Diff Protocol` (shortest working diff, reuse existing project patterns).
+  - Always enforce `ponytail` (shortest working diff, reuse existing project patterns).
   - If errors or bug reports occur: Automatically invoke `systematic-debugging` (root-cause diagnosis before touching code).
   - If writing new business logic: Automatically invoke `test-driven-development` (red-green-refactor).
   - If planning or orchestrating multi-task feature sets: Automatically hook into `subagent-driven-development` or `to-spec` / `to-tickets`.
@@ -83,7 +87,7 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 
 ## 4. Engineering Discipline & Coding Standards
 
-### Minimal & Surgical Code Invariants (Minimal, Clean & Surgical)
+### Ponytail & Karpathy Invariants (Minimal, Clean & Surgical)
 - **The Shortest Working Diff Wins**: Solve the problem with the absolute least new code. Deletion beats addition.
 - **Stop at the First Holding Rung**:
   1. *Does it need to exist?* Skip unasked-for features, options, and configs.
@@ -97,12 +101,24 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 - **Never Assume Silently**: If a request has multiple valid interpretations, surface the tradeoffs explicitly before implementing.
 - **Never Cut**: Input validation at trust boundaries, error handling that prevents data loss, security sanitization, or accessibility.
 
-### Verification & TDD Invariants (Verification & Debugging)
+### Superpowers Invariants (Verification & Debugging)
 - **Iron Law of Debugging**: `NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST`.
   - When encountering an error or test failure, inspect full error logs and stack traces.
   - Formulate a proven hypothesis before modifying production code. Symptom patching is failure.
 - **Iron Law of TDD**: For non-trivial logic, bug fixes, and behavior changes: write a failing test first, watch it fail, then write minimal code to make it pass.
 - **Verification Before Completion**: Never declare a task "Done" without running compilers, linters, or test suites to confirm green status.
+
+### Codebase Refactoring & Site-Wide Redesign Invariant (Anti-Laziness Gate)
+- **Mandatory 2-Phase Search-and-Replace**: When tasked with an audit, style redesign, or refactor across the site:
+  1. *Phase 1 (Exhaustive Inventory First)*: Run an automated search (`git grep` or pattern scan) across the entire repository to produce a full list of all matching files and lines. Editing before listing is strictly forbidden.
+  2. *Phase 2 (Exhaustive Elimination & Proof)*: Apply changes to ALL matched files, not just the single reference file provided. Run the search a second time to prove zero leftover occurrences. Tasks are incomplete if old patterns remain.
+
+### Mid-Project Page Insertion Invariant
+- **Isolated Route Extensions**: When adding a new page mid-build, never alter working sibling pages.
+  1. Register the route in `1_PRD.md` and `5_USER_FLOW.md`.
+  2. Consume centralized UI tokens and primitives (`@/components/ui/`), never write one-off styles.
+  3. Append the schema diff to `8_DECISION_LEDGER.md`.
+  4. Run `craft-check` to confirm zero regression on existing routes.
 
 ### ECC Invariants (Task Units & Boundaries)
 - **15-Minute Unit Decomposition**: Slices complex features into small, independently verifiable tasks.
@@ -133,14 +149,25 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - **Product White-BG Knockout**: For product assets on white backgrounds, use `mix-blend-mode: multiply` so the square background disappears seamlessly.
   - **Masked Edge Carousels**: Fade horizontal scrolling edges using `mask-image: linear-gradient(90deg, transparent, black 15% 85%, transparent)`.
   - **Tinted Neutrals & Skeletons**: Greys must be tinted toward the brand hue (never dead #888888). Use skeleton screens that mirror exact destination shapes during loads.
-- **Laws of UX & Human Psychology**:
+- **Laws of UX & Human Psychology (Niche Cognitive Grounding)**:
   - **Doherty Threshold**: Interfaces must respond to user input within `< 400ms` (instant optimistic UI feedback before network round trips).
   - **Fitts's Law & Hit Targets**: Clickable hit areas must be at least `44x44px` even if the visible icon is smaller (`position: relative` with an invisible `::after` padding expander).
   - **Hick's Law**: Reduce options upfront; progressive disclosure over decision paralysis.
   - **Miller's Law**: Chunk data into groups of 5–7 items max.
   - **Postel's Law**: Be liberal in what you accept (messy user inputs), conservative in what you output.
-  - **Jakob's Law**: Honor platform conventions before reinventing navigation patterns.
+  - **Jakob's Law**: Honor platform conventions before reinventing navigation patterns (e.g. checkout, cart, and search should sit where users expect).
+  - **Law of Proximity**: Related elements are visually clustered; unrelated elements have 2x-3x greater whitespace separation.
+  - **Law of Similarity**: Interactive elements sharing the same functional intent must share the exact same visual weight, shape, and hover states.
+  - **Law of Common Region**: Cards, panels, and distinct functional zones must have clear boundaries (subtle alpha border `rgb(0 0 0 / 0.08)` or tinted surface elevation).
+  - **Law of Continuity**: Align related information along unbroken linear paths to guide the eye downward through conversions.
+  - **Serial Position Effect**: Place the most vital information and conversion anchors at the absolute beginning and end of lists, navigation bars, and landing page folds.
+  - **Von Restorff Effect (Isolation Effect)**: When multiple similar actions exist, make the single primary conversion action visually distinct (high contrast, distinct elevation) so it immediately captures focal attention.
   - **Frequency of Use**: High-frequency actions (shortcuts, tabs) get 0ms transitions; rare milestone actions get choreographed delight.
+- **Scale, Concurrency & Crash Resilience Invariants**:
+  - **Database Connection Pooling**: Neon Postgres queries must run through pooled connections (`connectionString + "?sslmode=require"` with serverless driver) to prevent pool exhaustion during traffic surges.
+  - **Module-Level React Error Boundaries**: Every major page module (analytics charts, user lists, forms) must be wrapped in an independent `ErrorBoundary` with a friendly retry state. A failure in one component must NEVER white-screen the entire application.
+  - **Optimistic Mutation with Automatic Rollback**: Interactive toggles, likes, and state edits must update the UI instantly (Doherty Threshold), saving previous state to roll back cleanly with a toast notification if the network request fails.
+  - **Static Caching & ISR**: Public landing pages, blogs, and SEO catalog routes must use Stale-While-Revalidate (`revalidate = 3600`) so thousands of concurrent visitors hit edge cache instead of querying the database.
 - **Disney's 12 Animation Principles & Motion Physics**:
   - **Timing & Curves**: Entrances get `ease-out`; moves/resizes get `ease-in-out`; exits are **20% shorter** than entrances to feel snappy.
   - **Button Feedback**: `scale(0.97)` on `:active` press. Dropdowns settle in `150-250ms`. Stagger lists by **30ms**.
@@ -170,7 +197,7 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - Strict 4px spacing grid (`16px`, `20px`, `24px`, `32px`). Eliminate random arbitrary paddings (`py-[11px]`).
   - Maximum body line measure: `65–75ch` for reading comfort.
   - Contrast ratios: $\ge 4.5:1$ body text, $\ge 3:1$ large headings.
-- **Micro-Interactions & Motion (Tactile Spring Motion Physics)**:
+- **Micro-Interactions & Motion (Emil Kowalski Physics)**:
   - **NEVER use `ease-in` for UI animations.** Use snappy `ease-out` with custom cubic-bezier curves (`cubic-bezier(0.23, 1, 0.32, 1)`).
   - Duration cap: UI transitions must be under 300ms (buttons: 100-160ms, popovers: 150-250ms).
   - Popovers scale from their trigger origin, never center screen. Real objects scale from `0.95` with opacity, never from `0`.
@@ -178,11 +205,13 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 
 ---
 
-## 6. Communication & Tone Standards (Ultra-Dense Communication Protocol)
+## 6. Communication & Tone Standards (Caveman Protocol)
 
-- **Answer First**: Provide the conclusion/code/answer immediately. Pattern: `[thing] [action] [reason]. [next step].`
+- **Answer First**: Provide conclusion/code/answer immediately. Pattern: `[thing] [action] [reason]. [next step].`
 - **Kill Empty Ceremony**: No greetings, pleasantries, hedging, or filler (*"Sure! I'd be delighted to help"*, *"Basically"*, *"Actually"*, *"Hope this helps"*).
-- **Concise & High Density**: Technical precision without fluff. Every word earns its place.
+- **Concise & High Density**: Maximum technical precision, absolute minimum token usage. Every word earns its place.
+- **Git Commit Messages**: Strict imperative Caveman format: `<type>: <verb> <noun> (<reason>)` (e.g. `feat: add craft-check CLI`, `fix: strip 100vh layout shift`).
+- **Universal Ponytail Grounding**: Ponytail invariants apply to ALL code actions without exception: new features, debugging, refactors, and feature deletions. Shortest diff wins.
 - **Payload Verbatim**: Code blocks, terminal commands, file paths, numbers, and error messages must be quoted exactly.
 - **Diffs Over Dumps**: Show modified lines with 1-2 context lines, never dump 400 lines of unchanged code into chat.
 - **When to Use Formal Full Prose**: Security warnings and confirmations of irreversible/destructive operations (`rm`, `drop database`).
@@ -194,4 +223,3 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 - **Persistent Cross-Session Memory**: The agent reads and maintains `C:\Users\MHD\.gemini\config\LEARNINGS.md`.
 - **Dynamic Style Alignment**: As we build projects together, actively observe the user's workflow, code preferences, and feedback. When the user corrects a pattern or establishes a favorite technique, append it to `LEARNINGS.md` so the agent permanently adapts to their exact working style across all future projects.
 - **Continuous Mentorship**: Treat every project as a collaborative masterclass. Pair surgical, minimal code with high-signal explanations so the user masters practical system design while shipping.
-

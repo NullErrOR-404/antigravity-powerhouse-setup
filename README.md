@@ -68,20 +68,39 @@ This setup runs seamlessly across all modern agent environments:
 
 ---
 
-## 📦 What's Inside (37 Production Skills)
+## 📦 What's Inside (46 Production Skills & Enforcement Engine)
 
 | Category | Skills Included | Capability Highlights |
 |---|---|---|
-| **Architecture & Lifecycle** | `scaffold-spec`, `to-spec`, `to-tickets`, `domain-modeling`, `codebase-design` | Slices complex features into 15-min verifiable task graphs; auto-scaffolds `.spec/`. |
-| **Tactile UI & Motion** | `ui-ux-pro-max`, `taste-skill`, `impeccable`, `charles-polish`, `charles-ux-animation`, `animate` | 192 product palettes, 74 font pairings, custom cubic-bezier curves, zero layout shift. |
-| **Quality & Tech Debt** | `ponytail-review`, `ponytail-audit` | Senior dev code review: checks bugs, security, real load, and deletes dead abstractions. |
+| **Architecture & Lifecycle** | `scaffold-spec`, `to-spec`, `to-tickets`, `domain-modeling`, `codebase-design`, `deprecation-and-migration` | Slices complex features into 15-min verifiable task graphs; auto-scaffolds `.spec/`; zero-downtime Expand/Contract schema migrations. |
+| **Tactile UI & Motion** | `ui-ux-pro-max`, `taste-skill`, `impeccable`, `charles-polish`, `charles-ux-animation`, `animate`, `emil-design-eng`, `choreograph` | 192 product palettes, 74 font pairings, custom cubic-bezier curves, zero layout shift, Emil Kowalski spring physics. |
+| **Code & Quality Discipline** | `ponytail-review`, `ponytail-audit`, `constraint-driven-development`, `source-driven-development`, `test-driven-development`, `systematic-debugging` | Senior dev code review: shortest working diff, stops agents from adding `@ts-ignore`, cites official documentation, red-green TDD loops. |
+| **Backend & Commerce** | `stripe-integration`, `file-storage`, `resend-email`, `drizzle-orm-expert`, `zod-validation-expert`, `api-rate-limit-handler` | Stripe Checkout/Webhooks, Cloudflare R2 presigned uploads ($0 egress), React Email + Resend, Drizzle ORM transactions, runtime Zod validation, rate limiting. |
 | **AppSec & Pentesting** | `find-security-vulnerabilities-in-code`, `owasp-top-10-testing`, `api-security-testing` | Exploit-proven security review (OWASP Top 10:2025) with working Proof-of-Concepts. |
-| **Search & Citability** | `seo-geo`, `seo-schema`, `seo-technical`, `seo-content`, `seo-local`, `seo-programmatic` | Dominates Google Search, Google AI Overviews, Perplexity, and ChatGPT citations. |
+| **Search & Citability** | `seo-geo`, `seo-schema`, `seo-technical`, `seo-content`, `seo-local`, `seo-programmatic`, `seo-audit`, `seo` | Dominates Google Search, Google AI Overviews, Perplexity, and ChatGPT citations. |
 | **Enterprise Deliverables** | `mcp-builder`, `docx`, `pdf`, `xlsx`, `canvas-design`, `web-artifacts-builder` | Builds custom MCP servers and exports validated Office & interactive canvas widgets. |
+| **Mechanical Enforcement** | `craft-check` (Python CLI) | Zero-dependency global CLI gate. Enforces 4px grid, `100dvh`, motion curves, kills AI slop, and audits multi-file refactors. |
 
 ---
 
-## 🚀 1-Click Installation
+## ⚡ Universal Agent 1-Prompt Setup (For Any Coding Agent)
+
+Copy and paste this single prompt directly into **Claude Code, Cursor, Codex, OpenCode, Trae, or Antigravity**:
+
+```markdown
+Run this PowerShell command in your terminal right now to clone my powerhouse setup, install all missing system prerequisites (Node.js LTS, Python 3.12, uv, Git, GitHub CLI, Playwright Chromium), deploy all 46 production skills, and configure global operating invariants:
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "if (-not (Test-Path '$HOME\antigravity-setup')) { git clone https://github.com/NullErrOR-404/antigravity-powerhouse-setup.git '$HOME\antigravity-setup' }; Set-Location '$HOME\antigravity-setup'; .\install.ps1"
+
+Once installed, inspect `~/.gemini/config/GEMINI.md` and adopt these permanent operating rules:
+1. Always enforce Ponytail (the shortest working diff wins, zero premature abstractions).
+2. Always reply using Caveman protocol (conclusion and code diff first, zero filler or pleasantries).
+3. Ground every client build in the 8-document `.spec/` matrix and run `craft-check` before declaring any task complete.
+```
+
+---
+
+## 🚀 1-Click Installation (Manual Terminal)
 
 Open **PowerShell as Administrator** on your Windows PC and run:
 
@@ -90,10 +109,11 @@ git clone https://github.com/NullErrOR-404/antigravity-powerhouse-setup.git $HOM
 ```
 
 ### What the installer handles automatically:
-1. Installs **Node.js LTS (v26)**, **Git**, and **GitHub CLI** via Windows Package Manager.
+1. Installs **Node.js LTS (v26)**, **Python 3.12 LTS**, **uv**, **Git**, and **GitHub CLI** via Windows Package Manager.
 2. Installs the **Playwright Chromium & FFmpeg** headless browser engines.
-3. Deploys `GEMINI.md`, `LEARNINGS.md`, and all **37 production skills** to `~/.gemini/config/`.
-4. Configures `mcp_config.json` for autonomous browser testing and GitHub integration.
+3. Deploys `GEMINI.md`, `LEARNINGS.md`, and all **46 production skills** to `~/.gemini/config/`.
+4. Installs the **`craft-check`** global CLI into your `PATH`.
+5. Configures `mcp_config.json` for autonomous browser testing, GitHub integration, and Postgres MCP schema inspection.
 
 ---
 
