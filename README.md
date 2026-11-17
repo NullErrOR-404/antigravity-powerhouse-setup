@@ -1,48 +1,142 @@
-# Antigravity Powerhouse Agent Setup
+<p align="center">
+  <img src="assets/logo.png" width="140" alt="Antigravity Powerhouse Logo" />
+</p>
 
-Turn any default Antigravity installation into a **Staff-Level AI Engineer, Solutions Architect, and Product Designer**.
+<h1 align="center">Antigravity Powerhouse Agent Setup</h1>
+
+<p align="center">
+  <strong>The Ultimate Autonomous Full-Stack Architecture, Tactile UI, and Zero-Hallucination Operating Engine for Coding Agents.</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Antigravity-Ready-6366F1?style=for-the-badge&logo=google&logoColor=white" alt="Antigravity Ready" />
+  <img src="https://img.shields.io/badge/Claude_Code-Compatible-D97706?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude Code Compatible" />
+  <img src="https://img.shields.io/badge/Cursor-Rules_Enabled-0284C7?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Cursor Compatible" />
+  <img src="https://img.shields.io/badge/Codex-Supported-10B981?style=for-the-badge&logo=openai&logoColor=white" alt="Codex Supported" />
+  <img src="https://img.shields.io/badge/License-MIT-9333EA?style=for-the-badge" alt="MIT License" />
+</p>
+
+<p align="center">
+  <em>Created & Curated by <strong>MOHAMED SAMEEN S</strong></em>
+</p>
 
 ---
 
-## What This Setup Equips
+## 🌟 Overview
 
-1. **Operating Invariants (`GEMINI.md`)**:
-   - **Living Project Spec (`.spec/`)**: Automatically maintains 8 synced markdown documents for zero-hallucination memory across long sessions.
-   - **Ponytail v5.3 & Karpathy Guidelines**: Shortest working diff, platform primitive reuse, surgical changes, zero bloated wrappers.
-   - **Superpowers TDD & Root Cause**: Never patches bugs without proven diagnosis; test-driven execution.
-   - **Charles Liu / Emil Kowalski Craft**: 20 micro-CSS precision rules, 20 animation physics laws, and 20 explicit AI-slop bans.
-   - **Staff Architect Protocol**: Compares 2–3 viable tech stacks per client with cost/scale tradeoffs.
-2. **37 Curated Production Skills**:
-   - `scaffold-spec`, `ui-ux-pro-max`, `taste-skill`, `impeccable`, `charles-polish`, `charles-ux-animation`, `strix` (OWASP Top 10 AppSec), `seo-geo`, `seo-schema`, etc.
-3. **Hands & Eyes MCPs**:
-   - Autonomous GitHub integration + Playwright headless browser for visual self-healing UI tests.
+**Antigravity Powerhouse** transforms standard coding agents into **Staff-Level AI Engineers, Technical Solutions Architects, and Award-Winning Product Designers**. 
+
+Instead of generating bloated boilerplate, broken abstractions, or generic AI templates, your agent operates under strict **cognitive disciplines, living specification contracts, micro-CSS precision, and exploit-proven security verification**.
+
+### ⚡ Cross-Agent Compatibility (Universal)
+This setup runs seamlessly across all modern agent environments:
+- **Google Antigravity IDE** (`~/.gemini/config/GEMINI.md`)
+- **Claude Code** (`CLAUDE.md`)
+- **Cursor** (`.cursor/rules/powerhouse.mdc`)
+- **OpenAI Codex / Hermes / Trae** (`AGENTS.md`)
 
 ---
 
-## 1-Click Installation (For New Users)
+## 🧠 The 6 Core Engineering Pillars
 
-Open PowerShell as Administrator and run:
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force
-.\install.ps1
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 1. THE LIVING SPECIFICATION CONTRACT (.spec/)                               │
+│    Enforces 8 project-isolated living docs (1_PRD to 8_DECISION_LEDGER).     │
+│    Zero hallucinations across long sessions; changes are auto-ledgered.     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 2. SURGICAL MINIMAL-DIFF INVARIANTS                                         │
+│    The shortest working diff wins. Reuses platform & standard library       │
+│    primitives. Zero premature abstractions or single-use wrappers.          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 3. AUTONOMOUS TDD & ROOT-CAUSE VERIFICATION                                 │
+│    Iron Law: No fixes without root-cause proof. Red-green-refactor loops.   │
+│    Verification before declaring completion.                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 4. AWARD-WINNING TACTILE CRAFT & MICRO-CSS                                  │
+│    Bans all 20 AI slop indicators. Enforces 4px grid, tabs jitter fix,      │
+│    optical centering, OKLCH gradients, 100dvh, and spring physics.         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 5. SEARCH & ANSWER ENGINE SUPREMACY (SEO / GEO / AEO)                       │
+│    Auto-enforces Semantic HTML5, Schema.org JSON-LD graphs, and passage     │
+│    structures so Google AI Overviews and Perplexity cite your work.         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 6. HANDS & EYES MCP ECOSYSTEM                                               │
+│    Automated Git pushes, PR creation, and Playwright headless visual tests. │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### What `install.ps1` Does Autonomously:
-1. Installs Node.js LTS, Git, and GitHub CLI via `winget`.
-2. Downloads Playwright Chromium browser binary.
-3. Deploys `GEMINI.md`, `LEARNINGS.md`, and all 37 skills to `~/.gemini/config/`.
-4. Configures `mcp_config.json`.
+---
+
+## 📦 What's Inside (37 Production Skills)
+
+| Category | Skills Included | Capability Highlights |
+|---|---|---|
+| **Architecture & Lifecycle** | `scaffold-spec`, `to-spec`, `to-tickets`, `domain-modeling`, `codebase-design` | Slices complex features into 15-min verifiable task graphs; auto-scaffolds `.spec/`. |
+| **Tactile UI & Motion** | `ui-ux-pro-max`, `taste-skill`, `impeccable`, `charles-polish`, `charles-ux-animation`, `animate` | 192 product palettes, 74 font pairings, custom cubic-bezier curves, zero layout shift. |
+| **Quality & Tech Debt** | `ponytail-review`, `ponytail-audit` | Senior dev code review: checks bugs, security, real load, and deletes dead abstractions. |
+| **AppSec & Pentesting** | `find-security-vulnerabilities-in-code`, `owasp-top-10-testing`, `api-security-testing` | Exploit-proven security review (OWASP Top 10:2025) with working Proof-of-Concepts. |
+| **Search & Citability** | `seo-geo`, `seo-schema`, `seo-technical`, `seo-content`, `seo-local`, `seo-programmatic` | Dominates Google Search, Google AI Overviews, Perplexity, and ChatGPT citations. |
+| **Enterprise Deliverables** | `mcp-builder`, `docx`, `pdf`, `xlsx`, `canvas-design`, `web-artifacts-builder` | Builds custom MCP servers and exports validated Office & interactive canvas widgets. |
 
 ---
 
-## Post-Install: One-Time Authentications
+## 🚀 1-Click Installation
 
-After running the installer:
-1. **GitHub Login** (For autonomous pushing):
-   ```powershell
-   gh auth login
-   gh auth setup-git
-   ```
-2. **Add GitHub Token to MCP** (Optional, for PR/Issue inspection):
-   Paste their token into `~/.gemini/config/mcp_config.json`.
+Open **PowerShell as Administrator** on your Windows PC and run:
+
+```powershell
+git clone https://github.com/NullErrOR-404/antigravity-powerhouse-setup.git $HOME\antigravity-setup; Set-Location $HOME\antigravity-setup; Set-ExecutionPolicy Bypass -Scope Process -Force; .\install.ps1
+```
+
+### What the installer handles automatically:
+1. Installs **Node.js LTS (v26)**, **Git**, and **GitHub CLI** via Windows Package Manager.
+2. Installs the **Playwright Chromium & FFmpeg** headless browser engines.
+3. Deploys `GEMINI.md`, `LEARNINGS.md`, and all **37 production skills** to `~/.gemini/config/`.
+4. Configures `mcp_config.json` for autonomous browser testing and GitHub integration.
+
+---
+
+## 🔑 Post-Installation (One-Time Setup)
+
+To enable your agent to push to remote repositories and open pull requests autonomously, run:
+
+```powershell
+gh auth login
+gh auth setup-git
+```
+
+*(Select `GitHub.com` → `HTTPS` → `Yes` to configure Git credentials → Log in with web browser).*
+
+---
+
+## 🛠️ Usage Examples
+
+### 1. Starting a New System or Client Build
+Say to your agent:
+> *"Client wants an inventory management system with Stripe billing and customer WhatsApp notifications. Present 2–3 architecture options first."*
+- The agent presents 2–3 viable architectures comparing cost, speed, and database tiering.
+- Automatically invokes `scaffold-spec` to lock down all 8 `.spec/` documents.
+
+### 2. Crafting Award-Winning Tactile UI
+Say to your agent:
+> *"Build the landing page for our new fintech product."*
+- Automatically applies `ui-ux-pro-max` (fintech color palette & typography), `taste-skill` (one section per screen), and `charles-ux-animation` (snappy spring physics under 300ms, tabs jitter prevention, true optical centering).
+
+### 3. Pre-PR Security & Code Audit
+Say to your agent:
+> *"Review my branch before merging to main."*
+- Automatically runs `find-security-vulnerabilities-in-code` and `ponytail-review` to verify zero exploitability and the shortest working diff.
+
+---
+
+## 👨‍💻 Author & Lead Architect
+
+Created and maintained by **MOHAMED SAMEEN S**  
+GitHub: [@NullErrOR-404](https://github.com/NullErrOR-404)
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. Built for developers who refuse to ship AI slop.

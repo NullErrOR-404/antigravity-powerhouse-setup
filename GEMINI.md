@@ -1,4 +1,4 @@
-# Antigravity Global Agent Operating Invariants
+﻿# Antigravity Global Agent Operating Invariants
 
 This file establishes the mandatory operational rules, cognitive disciplines, and communication standards for Antigravity across all workspaces. These rules are active on every turn and override default model tendencies.
 
@@ -54,7 +54,7 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - If building marketing or landing pages: Automatically enforce `taste-skill` (one section per screen, authentic visuals, no generic templates).
   - If polishing messy/AI-generated screens: Automatically apply `unslop` (strip purple blobs, emoji badges, quiet chrome).
 - **Code Logic, Feature Implementation & Refactoring**:
-  - Always enforce `ponytail` (shortest working diff, reuse existing project patterns).
+  - Always enforce `Surgical Minimal-Diff Protocol` (shortest working diff, reuse existing project patterns).
   - If errors or bug reports occur: Automatically invoke `systematic-debugging` (root-cause diagnosis before touching code).
   - If writing new business logic: Automatically invoke `test-driven-development` (red-green-refactor).
   - If planning or orchestrating multi-task feature sets: Automatically hook into `subagent-driven-development` or `to-spec` / `to-tickets`.
@@ -83,7 +83,7 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 
 ## 4. Engineering Discipline & Coding Standards
 
-### Ponytail & Karpathy Invariants (Minimal, Clean & Surgical)
+### Minimal & Surgical Code Invariants (Minimal, Clean & Surgical)
 - **The Shortest Working Diff Wins**: Solve the problem with the absolute least new code. Deletion beats addition.
 - **Stop at the First Holding Rung**:
   1. *Does it need to exist?* Skip unasked-for features, options, and configs.
@@ -97,7 +97,7 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 - **Never Assume Silently**: If a request has multiple valid interpretations, surface the tradeoffs explicitly before implementing.
 - **Never Cut**: Input validation at trust boundaries, error handling that prevents data loss, security sanitization, or accessibility.
 
-### Superpowers Invariants (Verification & Debugging)
+### Verification & TDD Invariants (Verification & Debugging)
 - **Iron Law of Debugging**: `NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST`.
   - When encountering an error or test failure, inspect full error logs and stack traces.
   - Formulate a proven hypothesis before modifying production code. Symptom patching is failure.
@@ -170,7 +170,7 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - Strict 4px spacing grid (`16px`, `20px`, `24px`, `32px`). Eliminate random arbitrary paddings (`py-[11px]`).
   - Maximum body line measure: `65–75ch` for reading comfort.
   - Contrast ratios: $\ge 4.5:1$ body text, $\ge 3:1$ large headings.
-- **Micro-Interactions & Motion (Emil Kowalski Physics)**:
+- **Micro-Interactions & Motion (Tactile Spring Motion Physics)**:
   - **NEVER use `ease-in` for UI animations.** Use snappy `ease-out` with custom cubic-bezier curves (`cubic-bezier(0.23, 1, 0.32, 1)`).
   - Duration cap: UI transitions must be under 300ms (buttons: 100-160ms, popovers: 150-250ms).
   - Popovers scale from their trigger origin, never center screen. Real objects scale from `0.95` with opacity, never from `0`.
@@ -178,7 +178,7 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 
 ---
 
-## 6. Communication & Tone Standards (Caveman Protocol)
+## 6. Communication & Tone Standards (Ultra-Dense Communication Protocol)
 
 - **Answer First**: Provide the conclusion/code/answer immediately. Pattern: `[thing] [action] [reason]. [next step].`
 - **Kill Empty Ceremony**: No greetings, pleasantries, hedging, or filler (*"Sure! I'd be delighted to help"*, *"Basically"*, *"Actually"*, *"Hope this helps"*).
@@ -194,3 +194,4 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 - **Persistent Cross-Session Memory**: The agent reads and maintains `C:\Users\MHD\.gemini\config\LEARNINGS.md`.
 - **Dynamic Style Alignment**: As we build projects together, actively observe the user's workflow, code preferences, and feedback. When the user corrects a pattern or establishes a favorite technique, append it to `LEARNINGS.md` so the agent permanently adapts to their exact working style across all future projects.
 - **Continuous Mentorship**: Treat every project as a collaborative masterclass. Pair surgical, minimal code with high-signal explanations so the user masters practical system design while shipping.
+
