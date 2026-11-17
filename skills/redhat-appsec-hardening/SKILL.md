@@ -1,181 +1,144 @@
 ---
 name: redhat-appsec-hardening
-description: Elite Red-Hat defensive application security auditing, threat modeling, and surgical vulnerability remediation. Audits entire architecture, function-to-function trust boundaries, IDOR/BOLA gaps, Server Action auth leaks, cryptographic webhook verifications, data exfiltration, rate limiting, and HTTP security headers. Produces an audit scorecard and applies surgical fixes.
+description: Elite Red-Hat defensive application security auditing, multi-agent offensive exploitation, threat modeling, and surgical vulnerability remediation. Combines white-box source analysis, autonomous dynamic red-team exploitation (Strix/HTTP simulation), IDOR/BOLA verification, Server Action hardening, cryptographic webhook validation, and zero-downtime surgical patching.
 user-invocable: true
-argument-hint: "[target-path] or 'audit' or 'fix'"
+argument-hint: "[target-path] or 'audit' or 'red-team' or 'harden'"
 license: MIT
 ---
 
-# Red-Hat AppSec Hardening & Vulnerability Remediation
+# Red-Hat AppSec Hardening & Multi-Agent Exploitation Engine
 
-This skill transforms your coding agent into an elite defensive security engineer and penetration tester. It systematically threat-models the application, discovers subtle architectural and implementation vulnerabilities (including AI-generated security gaps), applies surgical zero-bloat fixes, and produces a production-ready security scorecard.
+This skill transforms your AI agent into an elite Red-Hat Application Security Engineer and Penetration Tester (Google Information Security / Microsoft MSRC bar). It combines deep **white-box architecture review**, **autonomous multi-subagent offensive exploitation**, and **surgical zero-bloat remediation** to ship impenetrable client applications.
 
 ---
 
 ## 1. When to Use This Skill
-- When preparing to deploy or ship a client application or production product.
-- When the user asks: *"Audit security", "Audit entire codebase for flaws", "Find security gaps in APIs/webhooks", "Harden this application", "Is this safe to ship?"*.
-- Before merging sensitive features (Auth, Payments, Multi-Tenant Workspaces, Webhooks, Data Ingestion).
+- When user asks: *"Audit security", "Pentest this application", "Find vulnerabilities in codebase/APIs", "Deploy security swarm", "Harden this project", "Is this ready to ship?"*.
+- Before shipping any production application or client deliverable.
+- Whenever authentication, payments, multi-tenancy, webhooks, or file uploads are implemented.
 
 ---
 
-## 2. Niche-Aware Threat Modeling (Stage 1)
-Security cannot be one-size-fits-all. The agent must first identify the **product niche and active trust boundaries**:
+## 2. Niche-Aware Threat Modeling Matrix (Automated Detection)
 
-| Application Niche | Primary Threat Vectors to Audit | Secondary Vectors |
+The agent automatically inspects project dependencies, schemas, and routes to determine the threat surface:
+
+| Product Niche | Primary Threat Surface | Attack Vectors Tested |
 | :--- | :--- | :--- |
-| **SaaS / Multi-Tenant Portals** | **BOLA / IDOR** (Tenant A accessing Tenant B's data), Privilege Escalation, Broken Access Control | Session fixation, invite token leakage |
-| **E-Commerce & Billing** | **Webhook Replay / Spoofing**, Price Tampering in Client Payloads, Race Conditions on Stock | Carding abuse, order ID enumeration |
-| **Lead Generation & Public Forms** | **SSRF**, Email Header Injection, Unauthenticated Form Flooding, Spambots | Rate-limit exhaustion, CRM poison |
-| **Internal Dashboards / Portals** | **Broken Authentication**, Over-Privileged API Keys, Stack Trace / Credential Leaks | CSRF, Stored XSS in admin fields |
+| **B2B SaaS / Multi-Tenant** | Tenant Boundaries, Workspace RBAC | **BOLA / IDOR**, Privilege Escalation, Cross-tenant data leaks |
+| **FinTech & E-Commerce** | Checkout, Subscriptions, Webhooks | **Webhook Forgery**, Client price tampering, Race conditions, Refund fraud |
+| **AI Agents & LLM Apps** | Tool calling, Prompts, Embeddings | **Prompt Injection**, SSRF via agent fetch tools, Insecure tool output |
+| **Healthcare / HIPAA / PII** | Patient data, Forms, Audit logs | **Data Exfiltration**, Unencrypted storage, URL token leakage |
+| **Public Marketplaces / Lead Gen**| Contact forms, Listings, Uploads | **SSRF**, File upload malware, ReDoS, Spam flooding, Stored XSS |
 
 ---
 
-## 3. The 7 Critical AppSec Vulnerability Audits (Stage 2)
+## 3. The 12 Comprehensive Enterprise Security Audits
 
-### Audit 1: Broken Object-Level Authorization (BOLA / IDOR)
-**The Vulnerability**: Querying data by a raw ID from request parameters without verifying tenant or user ownership.
-```typescript
-// ❌ VULNERABLE: Any logged-in user can change `id` in the URL to read another user's invoice
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  const invoice = await db.query.invoices.findFirst({ where: eq(invoices.id, params.id) });
-  return Response.json(invoice);
-}
+### Domain 1: Broken Object-Level Authorization (BOLA / IDOR)
+- **Check**: Every query by an entity ID (`id`, `orderId`, `docId`) MUST enforce tenant/user ownership in the `WHERE` clause.
+- **Pattern**: `where: and(eq(table.id, id), eq(table.tenantId, session.tenantId))`
 
-// ✅ HARDENED: Always filter by the authenticated user's organization/ID
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  const session = await auth.getSession();
-  if (!session) return new Response("Unauthorized", { status: 401 });
+### Domain 2: Next.js Server Action & RPC Public Exposure
+- **Check**: Server Actions are public HTTP POST endpoints. Every action MUST execute `const session = await auth.getSession(); if (!session) throw new Error("Unauthorized");` on line 1.
 
-  const invoice = await db.query.invoices.findFirst({
-    where: and(eq(invoices.id, params.id), eq(invoices.orgId, session.user.orgId)),
-  });
-  if (!invoice) return new Response("Not Found", { status: 404 });
-  return Response.json(invoice);
-}
-```
+### Domain 3: Cryptographic Webhook HMAC Signatures
+- **Check**: Stripe, Resend, Twilio, and GitHub webhooks MUST verify signatures using the **raw unparsed request text**, NEVER parsed JSON.
 
-### Audit 2: Next.js Server Action Auth Bypasses
-**The Vulnerability**: Assuming a Server Action is private because it lives inside an authenticated page component. Server Actions generate public HTTP endpoints.
-```typescript
-// ❌ VULNERABLE: Callable by anyone with curl/POST, no session check inside the action
-export async function deleteProjectAction(projectId: string) {
-  "use server";
-  await db.delete(projects).where(eq(projects.id, projectId));
-}
+### Domain 4: Data Exfiltration & Over-Fetching
+- **Check**: Forbid `SELECT *` on user/tenant tables. Enforce explicit column projection (whitelist only `id`, `name`, `email`; never return `password_hash`, `stripeCustomerId`, or auth tokens to client).
 
-// ✅ HARDENED: Explicit session validation & input schema validation inside the action
-export async function deleteProjectAction(rawInput: unknown) {
-  "use server";
-  const session = await auth.getSession();
-  if (!session?.user) throw new Error("Unauthorized");
+### Domain 5: Strict Runtime Schema Validation (Zod)
+- **Check**: Every route handler, server action, and webhook MUST parse inputs through strict Zod schemas with maximum string lengths to prevent ReDoS and memory exhaustion.
 
-  const { projectId } = z.object({ projectId: z.string().uuid() }).parse(rawInput);
-  await db.delete(projects).where(and(eq(projects.id, projectId), eq(projects.ownerId, session.user.id)));
-}
-```
+### Domain 6: SSRF (Server-Side Request Forgery) Defense
+- **Check**: Any backend `fetch()` or webhook dispatcher taking user-supplied URLs must block internal IPs (`127.0.0.1`, `localhost`, `169.254.169.254` cloud metadata).
 
-### Audit 3: Cryptographic Webhook Verification (HMAC)
-**The Vulnerability**: Parsing webhook payloads as JSON directly without verifying signatures against the raw unparsed request buffer.
-```typescript
-// ❌ VULNERABLE: Attackers can forge POST /api/webhooks/stripe to unlock free subscriptions
-export async function POST(req: Request) {
-  const data = await req.json();
-  if (data.type === "checkout.session.completed") { /* unlock */ }
-}
+### Domain 7: Rate Limiting & Abuse Prevention
+- **Check**: Public auth routes (`/api/auth/*`), contact forms, and reset-password routes MUST enforce sliding-window IP/user rate limiting (e.g. 5 attempts/minute).
 
-// ✅ HARDENED: Cryptographic signature verification with raw body
-export async function POST(req: Request) {
-  const rawBody = await req.text();
-  const signature = req.headers.get("stripe-signature") || "";
-  let event;
-  try {
-    event = stripe.webhooks.constructEvent(rawBody, signature, process.env.STRIPE_WEBHOOK_SECRET!);
-  } catch (err) {
-    return new Response("Invalid Signature", { status: 400 });
-  }
-  // Process verified event...
-}
-```
+### Domain 8: HTTP Defense-in-Depth Headers
+- **Check**: Configure strict headers in reverse proxy or `next.config.js`:
+  - `X-Frame-Options: DENY` (Anti-Clickjacking)
+  - `X-Content-Type-Options: nosniff` (Anti-MIME sniffing)
+  - `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+  - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
 
-### Audit 4: Data Exfiltration & Over-Fetching
-**The Vulnerability**: Returning full database models (`SELECT *`) to frontend responses, leaking sensitive fields (password hashes, provider tokens, internal notes).
-```typescript
-// ❌ VULNERABLE: Leaks password_hash or internal tenant secrets in network tab
-const user = await db.query.users.findFirst({ where: eq(users.id, id) });
-return Response.json(user);
+### Domain 9: Secrets, Keys & Token Hygiene
+- **Check**: Scan codebase for hardcoded `sk_live_`, `ghp_`, private keys, or exposed `.env` variables in client-side bundles (`NEXT_PUBLIC_` misuse).
 
-// ✅ HARDENED: Whitelisted explicit field projection
-const user = await db.query.users.findFirst({
-  where: eq(users.id, id),
-  columns: { id: true, name: true, email: true, image: true },
-});
-return Response.json(user);
-```
+### Domain 10: Supply Chain & Dependency CVEs
+- **Check**: Audit `package.json` / `requirements.txt` for known high/critical CVEs and unpinned risky dependencies.
 
-### Audit 5: Input Injection & Parameter Pollution
-**The Vulnerability**: Trusting query parameters or POST bodies without runtime type and length boundaries.
-- Every endpoint receiving input MUST parse through strict runtime schemas (Zod).
-- String inputs must enforce maximum lengths (`z.string().max(255)`) to prevent ReDoS (Regular Expression Denial of Service) and buffer exhaustion.
+### Domain 11: CORS & Origin Validation
+- **Check**: Forbid `Access-Control-Allow-Origin: *` when credentials are supported. Origin must match trusted tenant domains.
 
-### Audit 6: Rate Limiting on Abuse-Prone Endpoints
-**The Vulnerability**: Unrestricted endpoints allowing credential stuffing, OTP brute-forcing, or email spamming.
-- Enforce IP-based or session-based rate limits on: `/api/auth/*`, `/api/contact`, `/api/reset-password`, `/api/checkout`.
-
-### Audit 7: HTTP Security Headers & Transport Hardening
-**The Vulnerability**: Missing defensive HTTP headers, leaving apps exposed to clickjacking, MIME-sniffing, or insecure HTTP downgrades.
-Ensure headers are configured in `next.config.js`, middleware, or reverse proxy:
-```javascript
-const securityHeaders = [
-  { key: "X-Frame-Options", value: "DENY" },
-  { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-];
-```
+### Domain 12: Race Conditions & State-Mutation Concurrency
+- **Check**: Balance updates, inventory decrements, and coupon claims MUST use atomic database transactions (`tx.update(...).where(...)`) with locking, not client-driven increments.
 
 ---
 
-## 4. The 5-Stage Execution Protocol (Stage 3 & 4)
+## 4. Multi-Agent Red-Team Orchestration Swarm
 
-When invoked, the agent MUST follow these steps sequentially:
+Upon user request or approval, the coordinator agent launches **3 specialized autonomous subagents**:
 
-1. **Step 1: Inventory Trust Boundaries**:
-   - Grep for all API route handlers (`app/api/**/route.ts`, `pages/api/**/*.ts`).
-   - Grep for all Server Actions (`"use server"`).
-   - Grep for all Webhook handlers.
-2. **Step 2: Threat Analysis**:
-   - Check every route for missing auth, IDOR, raw un-validated inputs, and over-fetching.
-3. **Step 3: Surgical Remediation (Shortest Working Diff)**:
-   - Apply fixes directly at the boundary.
-   - Do not refactor adjacent business logic.
-4. **Step 4: Regressive Compilation**:
-   - Run `craft-check` and compiler/linter checks to ensure 0 build errors.
-5. **Step 5: Output the Security Scorecard**:
-   - Present findings clearly with risk levels (Critical, High, Medium, Low).
+```
+                       [COORDINATOR AGENT]
+                 Identifies Niche & Threat Model
+                                │
+        ┌───────────────────────┼───────────────────────┐
+        ▼                       ▼                       ▼
+  [SUBAGENT 1]            [SUBAGENT 2]            [SUBAGENT 3]
+  Static White-Box        Offensive Red-Team      Surgical Blue-Team
+  Auditor (AST & Code)    Attacker (PoC Exploit)  Patcher (Ponytail Diff)
+```
+
+1. **Subagent 1 (White-Box Code Auditor)**:
+   - Greps every API endpoint, Server Action, and database query.
+   - Traces data flow from request parameters to SQL/ORM execution.
+   - Compiles list of suspected trust-boundary gaps.
+
+2. **Subagent 2 (Offensive Red-Team Attacker)**:
+   - Runs simulated exploit payloads against target endpoints (tampering tenant IDs, crafting unauthenticated POSTs, injecting boundary test strings).
+   - Confirms true positives: produces a verified Proof-of-Concept (PoC) for every confirmed hole. Discards false alarms.
+
+3. **Subagent 3 (Surgical Blue-Team Remediation Specialist)**:
+   - Takes verified PoCs from Subagent 2.
+   - Applies the **shortest working diff** (Ponytail invariant) to patch each hole.
+   - Re-runs tests and `craft-check` to prove zero functional regressions.
 
 ---
 
-## 5. Standard Security Scorecard Format
+## 5. Standard Enterprise Security Scorecard
 
 ```markdown
 ==========================================================
-          RED-HAT DEFENSIVE SECURITY SCORECARD
+        RED-HAT DEFENSIVE APPSEC SCORECARD
 ==========================================================
-Overall Security Score: 98 / 100 [PRODUCTION READY]
+Overall Security Score: 98 / 100 [ENTERPRISE SHIP-READY]
 
-[CRITICAL / HIGH FINDINGS]
-- FIXED: BOLA/IDOR vulnerability in `/api/invoices/[id]/route.ts`. Added tenant ID filter.
-- FIXED: Unprotected Server Action `updateUserRoleAction`. Added session verification.
+[EXPLOIT PROOFS & SURGICAL PATCHES]
+- IDOR (Critical): Tenant B could read Tenant A invoices via `/api/invoices/[id]`.
+  -> PATCH: Injected `and(eq(invoices.id, id), eq(invoices.orgId, session.user.orgId))`.
+- AUTH LEAK (High): Server Action `promoteAdmin` callable unauthenticated.
+  -> PATCH: Added session role validation gate at entry.
+- WEBHOOK (Critical): Stripe webhook parsed unverified JSON.
+  -> PATCH: Wired `stripe.webhooks.constructEvent` with raw request buffer.
 
-[HARDENED BOUNDARIES VERIFIED]
-✔ Auth & Session Verification: 100% of mutation handlers protected.
-✔ Input Validation: All routes bound to runtime Zod schemas.
-✔ Webhook Cryptography: Stripe & Resend signatures validated against raw body.
-✔ Data Exfiltration: Explicit column projection enforced (0 password/token leaks).
-✔ Security Headers: HSTS, X-Frame-Options (DENY), nosniff active.
-✔ Rate Limiting: Active on all public auth/form endpoints.
+[VERIFIED ENTERPRISE DOMAINS]
+✔ 1. Multi-Tenant IDOR: 100% of queries filtered by tenant boundary.
+✔ 2. Server Action Auth: Zero publicly callable mutation holes.
+✔ 3. Webhook Cryptography: Raw body HMAC verification enforced.
+✔ 4. Data Over-Fetching: Explicit column whitelisting active.
+✔ 5. Runtime Schemas: Zod parsing on 100% of incoming payloads.
+✔ 6. SSRF Protection: Private/metadata IP ranges blocked.
+✔ 7. Rate Limiting: Sliding-window active on auth & forms.
+✔ 8. Transport Headers: HSTS, DENY, nosniff active.
+✔ 9. Secret Hygiene: 0 hardcoded keys detected.
+✔ 10. Dependency Health: 0 critical/high CVEs.
+✔ 11. CORS Boundary: Wildcards eliminated.
+✔ 12. Concurrency Safety: Atomic DB transactions on mutations.
 
 VERDICT: APPROVED FOR PRODUCTION SHIPPING.
 ==========================================================
