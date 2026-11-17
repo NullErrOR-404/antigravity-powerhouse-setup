@@ -175,6 +175,14 @@ def scan_code_files(root: Path, reporter: Reporter):
                 if re.search(r"box-shadow:\s*\d+px\s+\d+px\s+0", raw) and "neo-brutalist" not in raw.lower():
                     reporter.warning("STYLE", "Hard block shadow detected without 'neo-brutalist' exemption comment.", str(path), idx)
 
+                # 9. Senior Craft: Dead untinted dark mode (#000000 / #121212)
+                if re.search(r"#(?:000000|000|121212|1a1a1a)\b", raw) and ("background" in raw.lower() or "bg-" in raw.lower()):
+                    reporter.warning("COLOR", "Dead un-tinted dark background detected (#000/#121212). Tint surfaces with 2-4% brand hue.", str(path), idx)
+
+                # 10. Senior Craft: Fake round placeholder pricing ($100.00 / $99.00)
+                if re.search(r"\$(?:100|99|50|10)\.00\b", raw):
+                    reporter.warning("COPY", "Generic round dummy pricing ($100.00) detected. Use realistic domain data and edge-case numbers.", str(path), idx)
+
 
 def audit_pattern(root: Path, pattern: str, reporter: Reporter):
     """Exhaustive multi-file regex inventory for codebase-wide refactors."""

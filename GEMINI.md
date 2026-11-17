@@ -149,6 +149,11 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - **Product White-BG Knockout**: For product assets on white backgrounds, use `mix-blend-mode: multiply` so the square background disappears seamlessly.
   - **Masked Edge Carousels**: Fade horizontal scrolling edges using `mask-image: linear-gradient(90deg, transparent, black 15% 85%, transparent)`.
   - **Tinted Neutrals & Skeletons**: Greys must be tinted toward the brand hue (never dead #888888). Use skeleton screens that mirror exact destination shapes during loads.
+- **Senior Design Engineer Invariants (Killing the AI-Generated Feel)**:
+  - **Asymmetric Spatial Rhythm**: Forbid identical uniform card grids across a whole page. Pair dense functional modules (`gap-2`, `p-3`) with generous breathing sections (`py-20` to `py-28`). Break the symmetrical 3-box container trap with 2/3 + 1/3 splits or overlapping visual hero anchors.
+  - **Authentic Grounded Data**: Never use round placeholder dummy data (`$100.00`, `John Doe`, generic corporate stock photos). Use realistic edge-case domain data: localized currencies, negative percentages, real filenames with extensions, and real product UI captures.
+  - **Luminance-Based Dark Mode Elevation**: Never use pure black (`#000000`) or dead grey (`#121212`) backgrounds. Tint dark surfaces with 2–4% brand hue. Express depth through rising luminance tiers (Background 8% L ➔ Cards 13% L ➔ Popovers 18% L) paired with subtle 1px top alpha highlights (`rgb(255 255 255 / 0.08)`).
+  - **Tactile Physics & Micro-States**: Every clickable button must have `:active { transform: scale(0.97); }`. Hover states must never be instant or jarring (`transition: all 150ms cubic-bezier(0.23, 1, 0.32, 1)`). Tooltips must have a mandatory 150ms hover delay to prevent cursor strobing. Skeleton screens must pulse with an OKLCH gradient and match destination geometry.
 - **Laws of UX & Human Psychology (Niche Cognitive Grounding)**:
   - **Doherty Threshold**: Interfaces must respond to user input within `< 400ms` (instant optimistic UI feedback before network round trips).
   - **Fitts's Law & Hit Targets**: Clickable hit areas must be at least `44x44px` even if the visible icon is smaller (`position: relative` with an invisible `::after` padding expander).
