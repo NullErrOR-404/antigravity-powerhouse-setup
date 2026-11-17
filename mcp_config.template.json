@@ -1,0 +1,29 @@
+﻿{
+    "mcpServers":  {
+                       "playwright":  {
+                                          "args":  [
+                                                       "/c",
+                                                       "npx",
+                                                       "-y",
+                                                       "@executeautomation/playwright-mcp-server"
+                                                   ],
+                                          "env":  {
+                                                      "PATH":  "C:\\Program Files\\nodejs;C:\\Program Files\\Git\\cmd;C:\\Windows\\system32;C:\\Windows"
+                                                  },
+                                          "command":  "cmd.exe"
+                                      },
+                       "github":  {
+                                      "args":  [
+                                                   "/c",
+                                                   "npx",
+                                                   "-y",
+                                                   "@modelcontextprotocol/server-github"
+                                               ],
+                                      "env":  {
+                                                  "GITHUB_PERSONAL_ACCESS_TOKEN":  "PASTE_YOUR_GITHUB_TOKEN_HERE",
+                                                  "PATH":  "C:\\Program Files\\nodejs;C:\\Program Files\\Git\\cmd;C:\\Windows\\system32;C:\\Windows"
+                                              },
+                                      "command":  "cmd.exe"
+                                  }
+                   }
+}
