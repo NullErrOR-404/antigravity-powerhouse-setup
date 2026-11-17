@@ -2,7 +2,7 @@
 .SYNOPSIS
     Antigravity Powerhouse 1-Click Installer
 .DESCRIPTION
-    Installs all runtimes (Node.js LTS, Git, GitHub CLI, Playwright Chromium),
+    Installs all runtimes (Node.js LTS, Python 3.12, uv, Git, GitHub CLI, Playwright Chromium),
     deploys global operating invariants (GEMINI.md), 37 curated skills, and MCP configs.
 #>
 
@@ -17,6 +17,8 @@ Write-Host "`n[1/5] Checking and installing prerequisite runtimes..." -Foregroun
 
 $packages = @(
     @{ id = "OpenJS.NodeJS.LTS"; name = "Node.js LTS" },
+    @{ id = "Python.Python.3.12"; name = "Python 3.12 LTS" },
+    @{ id = "astral-sh.uv"; name = "uv (Fast Python Runner)" },
     @{ id = "Git.Git"; name = "Git" },
     @{ id = "GitHub.cli"; name = "GitHub CLI" }
 )
