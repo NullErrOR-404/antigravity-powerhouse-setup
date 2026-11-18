@@ -191,6 +191,17 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - **Optimistic Mutation with Automatic Rollback**: Interactive toggles, likes, and state edits must update the UI instantly (Doherty Threshold), saving previous state to roll back cleanly with a toast notification if the network request fails.
   - **Static Caching & ISR**: Public landing pages, blogs, and SEO catalog routes must use Stale-While-Revalidate (`revalidate = 3600`) so thousands of concurrent visitors hit edge cache instead of querying the database.
 - **Disney's 12 Animation Principles & Motion Physics**:
+  - **The 10 Mandatory Interaction Animation Invariants**:
+    1. *Entrances*: Start from `scale: 0.97` with `opacity: 0`, never from `scale: 0`.
+    2. *Buttons*: `scale: 0.97` while pressed (`button:active { scale: 0.97; }` with `transition: scale 150ms ease-out`).
+    3. *Validation Shake*: Shake wrong inputs (`translateX: 0, -10px, 10px, -6px, 6px, -3px, 0px` over 360ms) and turn border red.
+    4. *Steppers*: Slide next step in from the direction you're traveling, never generic crossfading.
+    5. *Accordions*: `:root { interpolate-size: allow-keywords; }` so `height: auto` animates smoothly on modern engines.
+    6. *Hardware-Accelerated Motion*: Animate `transform` and `opacity` only, NEVER `top` or `left` (prevents browser layout repaints every frame).
+    7. *Theme Switches*: Turn transitions off during theme toggle via `.theme-switching * { transition: none !important; }` to eliminate flash/jank.
+    8. *Tooltips*: Warm-up delay (150ms) only on the first tooltip; once open, show adjacent sibling tooltips instantly (0ms).
+    9. *Momentum Handoff*: Flicks and drags hand off on release to a spring matching velocity (`animate(y, 0, { type: "spring", duration: 0.5, bounce: 0, velocity })`), not fixed-duration transitions.
+    10. *Boundary Resistance*: For carousels/drawers past either edge, apply logarithmic tension that increases with pull distance, then spring back.
   - **Timing & Curves**: Entrances get `ease-out`; moves/resizes get `ease-in-out`; exits are **20% shorter** than entrances to feel snappy.
   - **Button Feedback**: `scale(0.97)` on `:active` press. Dropdowns settle in `150-250ms`. Stagger lists by **30ms**.
   - **Origin & Spatial Continuity**: Popovers start at `scale(0.95)` and enter from the trigger button's origin, and exit back to the trigger.

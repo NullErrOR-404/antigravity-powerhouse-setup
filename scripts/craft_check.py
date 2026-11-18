@@ -213,6 +213,10 @@ def scan_code_files(root: Path, reporter: Reporter):
                 if re.search(r"<(?:Sparkles|ShieldCheck)\b", raw) and ("button" in raw.lower() or "card" in raw.lower() or "header" in raw.lower()):
                     reporter.warning("ICON_CLICHE", "Banned cliché icon (Sparkles/ShieldCheck) detected as decorative filler. Use concrete domain action icons.", str(path), idx)
 
+                # 14. Motion: Non-GPU transitions (transition on top/left triggers layout repaints)
+                if re.search(r"(?:transition-(?:all|\[top\]|\[left\])|transition:\s*(?:top|left))\b", raw) and ("top-" in raw or "left-" in raw or "top:" in raw or "left:" in raw):
+                    reporter.warning("ANIMATION_PERF", "Animating 'top'/'left' triggers layout repaints every frame. Animate 'transform' (translate) and 'opacity' for GPU compositing.", str(path), idx)
+
 
 def audit_pattern(root: Path, pattern: str, reporter: Reporter):
     """Exhaustive multi-file regex inventory for codebase-wide refactors."""
