@@ -191,6 +191,10 @@ def scan_code_files(root: Path, reporter: Reporter):
                 if re.search(r"\banimate-(?:ping|pulse)\b", raw) and ("w-2" in raw or "w-3" in raw or "h-2" in raw or "h-3" in raw):
                     reporter.warning("AI_SLOP", "Decorative pulsing dot detected (AI slop trope). Use calm, purposeful status indicators.", str(path), idx)
 
+                # 13. Cliché Icons: Banned decorative Sparkles / AI Holy Trinity in UI controls
+                if re.search(r"<(?:Sparkles|ShieldCheck)\b", raw) and ("button" in raw.lower() or "card" in raw.lower() or "header" in raw.lower()):
+                    reporter.warning("ICON_CLICHE", "Banned cliché icon (Sparkles/ShieldCheck) detected as decorative filler. Use concrete domain action icons.", str(path), idx)
+
 
 def audit_pattern(root: Path, pattern: str, reporter: Reporter):
     """Exhaustive multi-file regex inventory for codebase-wide refactors."""
