@@ -331,13 +331,17 @@ This protocol governs how the agent collaborates, prevents cosmetic pseudo-redes
 
 ### A. The "Vague Prompt" De-Abstraction Engine
 When the user says *"make it look premium"*, *"make it professional"*, *"make it stand out"*, or *"it feels generic"*, the agent is **strictly forbidden from blindly applying cosmetic tweaks** (no purple gradients, floating cards, or extra drop-shadows).
-- **Mandatory Translation to Concrete Archetypes**: The agent immediately translates vague subjective adjectives into one of the 6 concrete design archetypes:
+- **Mandatory Translation to Concrete Archetypes**: The agent immediately translates vague subjective adjectives into one of the 10 concrete design archetypes:
   1. *FinTech / High-Trust* ➔ Deep ink canvas, electric indigo, ultra-thin display typography, negative tracking, and tabular numeric figures (`stripe.DESIGN.md`).
   2. *Productivity & Tooling* ➔ OLED dark surface, quiet chrome, dense information architecture, mono badges, 100% keyboard shortcut discoverability (`linear.DESIGN.md`).
   3. *Developer Infrastructure* ➔ Void-black background, 1px alpha grid lines, emerald/cyan accents, and syntax-highlighted code anchors (`supabase.DESIGN.md` / `vercel.DESIGN.md`).
   4. *Luxury / Editorial* ➔ Warm stone neutrals, unhurried whitespace (`py-28`), serif display titles, and high-contrast editorial photography (`airbnb.DESIGN.md`).
   5. *Clean B2B / SaaS* ➔ Swiss grid, generous typography hierarchy, high-contrast primary call-to-action, zero floating clutter.
-  6. *Operations, Logistics & ERP (JavaDript Archetype)* ➔ Tinted quiet canvas (`#f8f9fa`), multi-node SVG bezier sync flows (Sankey-lite), proportional two-tone allocation bars (committed vs available), tabular FIFO subledgers, and dense multi-pane canvas (`operations-erp.DESIGN.md`).
+  6. *Operations, Logistics & ERP* ➔ Tinted quiet canvas (`#f8f9fa`), multi-node SVG bezier sync flows (Sankey-lite), proportional two-tone allocation bars (committed vs available), tabular FIFO subledgers, and dense multi-pane canvas (`operations-erp.DESIGN.md`).
+  7. *Hospitality & Order Workflows* ➔ Fresh organic canvas (`#fbfbfa`), matcha/olive green accents (`#65a30d`), horizontal step-wizard progress bars, scannable QR token grids, and table routing callouts (`hospitality-workflow.DESIGN.md`).
+  8. *Night Executive & Institutional Analytics* ➔ Twilight deep dark canvas (`#0b0f19`), vibrant KPI stat sparklines, dual-metric spline charts (actual vs AI forecast), radial donut status rings, and gradient executive banners (`night-executive-analytics.DESIGN.md`).
+  9. *Swiss Editorial & Brand Catalog* ➔ Warm linen canvas (`#f5f4ef`), bold grotesque sans lockups with serif italic accents, clean 1px borders, and oversized footer watermark logotypes (`swiss-editorial-catalog.DESIGN.md`).
+  10. *Physical Device & Interactive Simulator* ➔ Neutral studio backdrop (`#f4ede4`), rendered mobile phone chassis with notch, ticket-stub receipt cards with circular perforated punch-outs, and companion walkthrough rails (`device-simulator-walkthrough.DESIGN.md`).
 - **The Grounding Rule**: Ask 1 clarifying choice or propose the single strongest matching archetype with its concrete visual attributes before editing.
 
 ### B. The "Clean-Canvas" Redesign Protocol (Killing Pseudo-Redesigns)
