@@ -8,16 +8,17 @@ This file establishes the mandatory operational rules, cognitive disciplines, an
 
 Every project workspace must maintain a single source of truth in `<project-root>/.spec/`.
 
-### The 8 Living Documents
+### The 8 Living Documents + The Napkin Runbook
 When brainstorming, planning, or building within a project repository, ensure `<project-root>/.spec/` contains:
 1. `1_PRD.md` — Product Requirements, Problem Statement, Scope, Target Audience, and Non-Goals.
 2. `2_TRD.md` — Technical Architecture, Tech Stack, Systems Invariants, Tradeoffs, and Boundaries.
 3. `3_DATABASE_SCHEMA.md` — Models, Tables, Columns, Data Types, Foreign Keys, Indexes, and Migration Logs.
 4. `4_BACKEND_SCHEMA.md` — API Endpoints, Payloads, Query Params, Auth Boundaries, and HTTP Status Codes.
 5. `5_USER_FLOW.md` — Step-by-step user journeys, interaction state machines, edge-case failure loops.
-6. `6_UI_UX_DESIGN.md` — Color Tokens, Typography Scale, Layout Hierarchy, Craft Floor, and Brand Character.
+6. `6_UI_UX_DESIGN.md` — Color Tokens, Typography Scale, Layout Hierarchy, Craft Floor, and Brand Character (or companion `DESIGN.md`).
 7. `7_IMPLEMENTATION_PLAN.md` — 15-minute decomposed task graph with explicit blocking dependencies.
 8. `8_DECISION_LEDGER.md` — Chronological log of architecture decisions, rulings, and schema alterations.
+9. `NAPKIN.md` (or top section of `8_DECISION_LEDGER.md`) — The Curated Runbook. Max 10 items per category, priority-sorted descending, zero journal narratives. Every single rule MUST follow: `[YYYY-MM-DD] Short Rule` followed by an explicit `Do instead: <concrete repeatable action>`.
 
 ### Operational Enforcement
 - **Strict Project Isolation**: `.spec/` files are strictly workspace-local. One project's rules and schemas never leak into another.
@@ -28,8 +29,8 @@ When brainstorming, planning, or building within a project repository, ensure `<
   - On Turn 1, the agent MUST read:
     1. `.context.json` (The Machine-Readable Project DNA: Archetype, exact OKLCH tokens, routes, and core security invariants).
     2. `1_PRD.md` (Product identity, scope, non-goals).
-    3. `8_DECISION_LEDGER.md` (Past rulings and schema evolution).
-  - The agent begins its response by acknowledging loaded state in 1 concise line: `[Context Handshake]: Loaded <ProjectName> DNA (.context.json + 8 spec docs, N ledger entries synced). Ready.`
+    3. `8_DECISION_LEDGER.md` & `NAPKIN.md` (Past rulings, schema evolution, and curated "Do instead" execution traps).
+  - The agent begins its response by acknowledging loaded state in 1 concise line: `[Context Handshake]: Loaded <ProjectName> DNA (.context.json + 8 spec docs + Napkin runbook, N ledger entries synced). Ready.`
   - Answering feature requests or writing code in an existing project without executing this Handshake is considered an operational failure.
 
 ---
@@ -80,11 +81,12 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 - **Client System Architecture & Tech Stack Selection (Freelance Engine)**:
   - When kicking off new systems (ERPs, CRMs, internal tools, customer portals, e-commerce):
     - **Step 1 (Architectural Options & Tradeoffs)**: Present 2–3 viable architecture options comparing cost, velocity, scale, database tiering (e.g. NeonDB for serverless Postgres with zero inactivity pause vs. Cloudflare D1/Turso for edge SQLite vs. Supabase for integrated BaaS auth/storage), and AI integration boundaries.
-    - **Crucial Rule**: For each recommended option, explicitly explain:
-      1. **Why this stack is optimal for the specific project constraints.**
-      2. **Why alternative popular stacks were NOT chosen** (e.g. avoiding Supabase free tier inactivity shutdowns for low-traffic clients, avoiding serverful VPS hosting when serverless saves 100% idle cost).
-    - **Step 2 (The Grilling Pass)**: Once an option is chosen, immediately execute the `/grill-me` protocol to resolve data models, edge cases, and business logic dependencies.
-    - **Step 3 (Living Spec Locking)**: Lock the agreed architecture into `.spec/` (1_PRD through 8_DECISION_LEDGER) before implementing code.
+    - **Step 2 (The Grilling Pass & Business Viability Audit)**:
+      - Once an option is chosen, execute the `/grill-me` protocol to resolve data models, edge cases, and business logic dependencies.
+      - **Financial Grounding (Founder Engine)**: Quantify unit economics using real break-even math (`scripts/lib/unit_economics.py`) and pricing sensitivity curves (`scripts/lib/van_westendorp.py`). Populate `1_PRD.md` with explicit contribution margins, daily break-even thresholds, and validated price bands rather than guessed numbers.
+    - **Step 3 (Living Spec & Design DNA Locking)**:
+      - Lock agreed architecture into `.spec/` (1_PRD through 8_DECISION_LEDGER + NAPKIN.md).
+      - Seed `6_UI_UX_DESIGN.md` (or companion `DESIGN.md`) using authoritative design tokens from our production presets (`templates/design-presets/`: Stripe, Linear, Supabase, Vercel, Apple, Airbnb, Superhuman, X.ai) matching the client's aesthetic archetype. Zero hallucinated color hexes.
 - **Search, Discovery & AI Optimization (SEO / GEO / AEO Supremacy)**:
   - Whenever building public web pages, marketing sites, blogs, or landing pages:
     - Automatically load `seo-geo` (Citability score, passage structure, entity clarity for Google AI Overviews, Perplexity, and ChatGPT citations).
