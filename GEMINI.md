@@ -109,19 +109,63 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
 
 ## 4. Engineering Discipline & Coding Standards
 
-### Ponytail & Karpathy Invariants (Minimal, Clean & Surgical)
-- **The Shortest Working Diff Wins**: Solve the problem with the absolute least new code. Deletion beats addition.
-- **Stop at the First Holding Rung**:
-  1. *Does it need to exist?* Skip unasked-for features, options, and configs.
-  2. *Already in this codebase?* Reuse existing helpers and patterns before writing new ones.
-  3. *Native platform / Standard library?* Use platform primitives (e.g. `<input type="date">`, Node crypto) instead of pulling npm packages.
+### The 5 Core Pillars Invariants (Unbreakable Operational Floor)
+These 5 pillars form the mandatory core of our engineering and design execution. Every line of code, design element, and communication must adhere to them 100%.
+
+#### Pillar 1: Ponytail (The Shortest Working Diff & Lazy Senior Dev)
+- **The Shortest Working Diff Wins**: Solve the whole problem with the least new code. Deletion beats addition.
+- **The 6-Step Holding Rung**:
+  1. *Does it need to exist?* Skip unasked-for features, options, flexibility, and "for later" boilerplate.
+  2. *Already in this codebase?* Reuse existing helpers, components, services, and patterns exactly as the surrounding code does.
+  3. *Standard library / Platform primitive?* Use platform primitives (e.g. `<input type="date">`, Node crypto, URL, CSS clamp) instead of pulling packages. A house component beats a native widget; a native widget beats an npm package.
   4. *Installed dependency?* Never install a new dependency for something existing libraries can handle.
   5. *Can it be one clean line?* Write 1 readable line.
   6. *Minimum code that works.*
-- **Zero Premature Abstractions**: No factories, wrappers, single-use interfaces, or "for later" boilerplate. If 200 lines can be written in 50 clean lines, rewrite it.
-- **Surgical Diffs**: Touch only what you must. Never perform drive-by formatting or refactor adjacent unbroken code.
-- **Never Assume Silently**: If a request has multiple valid interpretations, surface the tradeoffs explicitly before implementing.
-- **Never Cut**: Input validation at trust boundaries, error handling that prevents data loss, security sanitization, or accessibility.
+- **Pre-Flight Caller Audit**: Before fixing or editing a function, grep every caller in the codebase. Fix the root cause once in the shared code.
+- **Finished & Checked**: Lazy code without its check is unfinished. Any new non-trivial logic (branch, loop, parser, auth, or money) must leave an assert self-check or test.
+- **Never Cut**: Input validation at trust boundaries, error handling that prevents data loss, security sanitization, accessibility, or anything the user explicitly asked for.
+
+#### Pillar 2: Karpathy Guidelines (Think Before Coding, Surgical Changes, Goal-Driven)
+- **Think Before Coding**: Don't assume silently. State assumptions explicitly. If multiple interpretations exist, present them upfront—never pick secretly. If unclear, stop and ask.
+- **Simplicity First**: If you write 200 lines and it could be 50, rewrite it. No speculative flexibility. No single-use abstractions or wrapper interfaces.
+- **Surgical Changes**: Touch only what you must. Don't touch adjacent code, comments, or formatting. Match existing code style even if you'd do it differently. Remove orphans (unused imports/variables) caused by YOUR change, but never delete pre-existing dead code unasked.
+- **Goal-Driven Execution**: Every task must have a verifiable success check before writing implementation code (`Red ➔ Green ➔ Verify`). Every changed line must trace directly to the prompt.
+
+#### Pillar 3: Matt Pocock Engineering & Architectural Depth (`codebase-design`, TDD, `/grill-me`)
+- **Deep Modules (Small Interface + Deep Implementation)**:
+  - Maximize *Depth*: Pack substantial capability behind a small, simple interface. Few methods, simple primitive parameters, complex internal implementation hidden.
+  - Avoid *Shallow Modules*: Modules where the interface is nearly as complex as the implementation (pass-through wrappers).
+  - *The Deletion Test*: If you delete the module and complexity vanishes, it was a useless pass-through. If complexity reappears across N callers, it earned its keep.
+  - *Seams & Adapters*: A seam is where behavior varies. One adapter means a hypothetical seam (premature abstraction). Two adapters means a real seam.
+- **Rigorous TDD at Pre-Agreed Seams**:
+  - Tests verify behavior through public interfaces, never internal implementation details.
+  - Vertical Slicing: Build one vertical tracer bullet (one test ➔ one minimal implementation ➔ verify) rather than bulk horizontal tests.
+  - Anti-Tautology: Expected test assertions must come from an independent truth (literal, spec), never recomputed using the application logic.
+- **Continuous Grilling & Handoff**:
+  - Slices tasks into 15-minute verifiable units with explicit blocking dependencies (`.spec/7_IMPLEMENTATION_PLAN.md`).
+
+#### Pillar 4: Impeccable (Out-of-Distribution Frontend Craft & Surface Modes)
+- **The 4 Surface Modes**:
+  1. *Persuade* (Landing pages, marketing): Bold, distinct visual point of view, high-contrast hero moments.
+  2. *Operate* (Dashboards, ERPs, POS, settings): Precision, restraint, high scanability, dense information architecture, quiet chrome.
+  3. *Read* (Documentation, changelogs): Clean typography hierarchy, effortless reading comfort (`65-75ch`).
+  4. *Experience* (Portfolios, creative showcases): The artifact leads from the first viewport; interface recedes.
+- **The Absolute Craft Floor Bans**:
+  - NO kickers or eyebrows above headings (let the heading carry its own weight).
+  - NO gradient text (emphasis comes from weight, size, or contrast).
+  - NO glassmorphism / blur as lazy decoration.
+  - NO colored `border-left` or `border-right` above 1px on cards/callouts.
+  - NO hard block shadows (`4px 4px 0`) outside authentic neo-brutalist worlds.
+  - NO monospace as a costume for "technical" (monospace belongs only on code, data tables, and numbers).
+  - NO nested cards (cards inside cards).
+- **The Parts You Did Not Draw**:
+  - Theme the unstyled browser defaults from the palette: text selection highlight, caret color, optical focus rings (`focus-visible:ring-2`), custom scrollbars, and link underline clearance (`text-underline-offset: 0.2em`).
+
+#### Pillar 5: Caveman Protocol (Ultra-Terse, Low-Token Engineering Voice)
+- **Answer First**: Pattern: `[thing] [action] [reason]. [next step].`
+- **Kill Empty Ceremony**: No greetings, pleasantries, hedging, or filler (*"Sure! I'd be delighted to help"*, *"Basically"*, *"Actually"*, *"Hope this helps"*).
+- **Payload Verbatim**: Code blocks, terminal commands, file paths, numbers, and error messages must be quoted exactly. Diffs over full file dumps.
+- **Clarity Beats Compression**: Never drop negations (`not`, `never`, `no`). Use plain short words. Break caveman into full prose ONLY for security warnings, destructive actions (`rm`), and user disambiguation.
 
 ### Superpowers Invariants (Verification & Debugging)
 - **Iron Law of Debugging**: `NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST`.
