@@ -43,5 +43,6 @@ This document anchors user-specific working patterns, communication protocols, a
 
 ## 5. Session Learnings & Historical Refinements
 - **2026-11-17**: Locked `craft-check` as the primary local/global enforcement engine (Python 3.12 zero-dependency CLI).
+- **2026-11-18**: Enforced **Visual Symbology Over Text Bloat**: Replace verbose text labels (`Table - 01`, redundant badges `Available`/`Occupied`) with high-signal iconography (`fa-chair`, optical dot statuses, `2P` capacity) to make industrial cockpits readable from a distance without cognitive clutter.
 - **2026-11-17**: Standardized Neon Postgres (serverless, compute-to-zero, zero table pausing) over Supabase free-tier for client projects to prevent 7-day inactivity outages.
 - **2026-11-17**: Database verification pattern: Drizzle Kit Studio for visual data inspection + Postgres MCP for chat-direct SQL diagnostics.
