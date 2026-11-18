@@ -71,9 +71,20 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - If errors or bug reports occur: Automatically invoke `systematic-debugging` (root-cause diagnosis before touching code).
   - If writing new business logic: Automatically invoke `test-driven-development` (red-green-refactor).
   - If planning or orchestrating multi-task feature sets: Automatically hook into `subagent-driven-development` or `to-spec` / `to-tickets`.
-- **Security, Authorization & Red-Hat Hardening**:
-  - Whenever auth, JWTs, sessions, sensitive endpoints, or pre-PR/pre-ship gates are touched: Automatically invoke `redhat-appsec-hardening`, `find-security-vulnerabilities-in-code`, and `owasp-top-10-testing`.
+- **Security, Authorization & Red-Hat Hardening (Condom + Red-Hat Protocol)**:
+  - Whenever auth, JWTs, sessions, sensitive endpoints, or pre-PR/pre-ship gates are touched: Automatically invoke `condom` (pre-launch legal and vulnerability audit), `redhat-appsec-hardening`, `find-security-vulnerabilities-in-code`, and `owasp-top-10-testing`.
   - Enforce the 5-Stage Defensive Security Funnel: Threat-model by niche, audit BOLA/IDOR on all queries, verify Server Action session validation, ensure HMAC raw webhook signatures, prevent data over-fetching, and apply surgical boundary patches before generating the final Security Scorecard.
+  - **The 10 Mandatory Pre-Launch Survival Invariants (Wrap Before You Ship)**:
+    1. *Zero Client-Side Secret Leaks*: Database service-role/admin keys, Stripe secret keys, or AI provider keys must NEVER appear in public env vars, client code, or bundled JS.
+    2. *Database Rules & RLS Locked*: Tables must never have open Row-Level Security; policies must verify authenticated user IDs before permitting writes.
+    3. *Zero Client-Trusted Pricing*: Never trust prices, totals, or discount rates sent from the client browser. Prices must be looked up server-side from authoritative database records or Stripe Price IDs.
+    4. *Cryptographic Proof of Payment*: Subscriptions and order fulfillments must NEVER be granted solely on browser checkout return redirects; fulfill ONLY upon verifying HMAC signatures on raw webhook events (`stripe.webhooks.constructEvent`).
+    5. *Server-Side Authorization on Server Actions*: Never trust that a client-side route guard protects backend Server Actions or API routes. Every Server Action must independently extract and verify the caller's session.
+    6. *IDOR / BOLA Prevention*: Every database query targeting an ID must include a tenancy/ownership filter (`WHERE id = :id AND user_id = :current_user_id`).
+    7. *Unbounded Endpoint Throttling*: Every public endpoint that costs money, sends emails/SMS, or invokes AI models MUST enforce rate limiting (via Upstash Redis / Vercel KV / in-memory tokens).
+    8. *Zero Repository Secret Leaks*: Commits, git history, and client log streams must be clean of API keys and `.env` files.
+    9. *Tracking & Consent Compliance*: Analytics, ad pixels (Meta Pixel, Google Tag Manager), and session replay tools must NOT fire before obtaining explicit cookie consent.
+    10. *FTC Negative Option & Cancellation Compliance*: Subscriptions must provide a clean 1-click online cancellation flow without deceptive dark patterns, hidden fees, or mandatory phone call requirements.
 - **Custom Tooling / External Integrations**:
   - Whenever connecting new APIs or services: Automatically hook into `mcp-builder`.
 - **Documents & Spreadsheets**:
