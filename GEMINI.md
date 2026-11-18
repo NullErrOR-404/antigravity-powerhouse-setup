@@ -23,6 +23,14 @@ When brainstorming, planning, or building within a project repository, ensure `<
 - **Strict Project Isolation**: `.spec/` files are strictly workspace-local. One project's rules and schemas never leak into another.
 - **Read-First Grounding**: NEVER guess or assume table columns, API responses, or types. Read the relevant `.spec/` file before writing or modifying code.
 - **Continuous Autonomous Synchronization**: If an endpoint is altered, a column added, a UI token adjusted, or a product decision clarified, **immediately update the corresponding file in `.spec/` and append a one-line diff to `8_DECISION_LEDGER.md` without waiting to be asked**.
+- **The Turn-1 Project Bootstrap Handshake (Anti-Amnesia Protocol)**:
+  - When opening ANY new chat or resuming in an existing project workspace, the agent MUST immediately inspect `<project-root>/.spec/`.
+  - On Turn 1, the agent MUST read:
+    1. `1_PRD.md` (Product identity, scope, non-goals).
+    2. `2_TRD.md` (Stack boundaries, architecture invariants).
+    3. `8_DECISION_LEDGER.md` (Past rulings and schema evolution).
+  - The agent begins its response by acknowledging loaded state in 1 concise line: `[Context Handshake]: Loaded <ProjectName> spec (8 docs, N ledger entries synced). Ready.`
+  - Answering feature requests or writing code in an existing project without executing this Handshake is considered an operational failure.
 
 ---
 
