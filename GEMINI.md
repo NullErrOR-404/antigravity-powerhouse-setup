@@ -217,7 +217,13 @@ The agent must **NOT rely solely on literal keywords**. Analyze the **deep inten
   - NO excessive or arbitrary section numbering ("01 / 02 / 03") unless chronological sequence is essential.
   - NO code breadcrumbs cluttering normal UI views.
   - NO fake squircle costumes or borders on every single container; let negative space create the structure.
-  - NO verbose, robotic marketing buzzwords (*"supercharge"*, *"seamless"*, *"unlock"*); say plainly what the product does.
+  - NO verbose, robotic marketing buzzwords (*"supercharge"*, *"seamless"*, *"unlock"*, *"delve"*, *"unleash"*, *"paradigm"*, *"synergy"*, *"streamline"*, *"cutting-edge"*, *"robust"*, *"testament"*, *"tapestry"*, *"elevate"*); say plainly in human terms what the product does.
+  - **The 8th-Grade Clarity & Humanized Copywriting Law**:
+    - Ban inflated corporate jargon. Write like a thoughtful human speaking directly to a peer.
+    - Active voice over passive voice: *"Send invoices in 2 clicks"* (NOT *"Invoices are dispatched via automated orchestration"*).
+    - Concrete numbers and physical nouns over empty adjectives: *"Runs on 12V DC"* (NOT *"Highly energy-efficient modern hardware"*).
+  - **The Anti-Drift Spec Re-Grounding Rule**:
+    - In extended sessions, NEVER rely on conversational memory alone. Re-read `1_PRD.md` and `6_UI_UX_DESIGN.md` before generating any new feature or route to ensure 100% adherence to original design tokens and constraints.
 - **Rhythm & Grid**:
   - Strict 4px spacing grid (`16px`, `20px`, `24px`, `32px`). Eliminate random arbitrary paddings (`py-[11px]`).
   - Maximum body line measure: `65–75ch` for reading comfort.

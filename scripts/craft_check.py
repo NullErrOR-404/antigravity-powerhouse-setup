@@ -35,8 +35,13 @@ IGNORED_DIRS = {
 # Standard app source directories to prioritize when present
 APP_SOURCE_DIRS = ["src", "app", "pages", "components", "lib", "routes"]
 
-# Banned AI marketing buzzwords (Warning)
-BUZZWORDS = ["supercharge", "seamless", "seamlessly", "unlock", "game-changing", "revolutionary"]
+# Banned AI marketing buzzwords & cliché jargon (Warning)
+BUZZWORDS = [
+    "supercharge", "seamless", "seamlessly", "unlock", "game-changing", 
+    "revolutionary", "delve", "unleash", "paradigm", "synergy", 
+    "streamline", "cutting-edge", "robust", "testament", "beacon",
+    "transformative", "tapestry", "elevate", "foster", "empower"
+]
 
 class Reporter:
     def __init__(self):
