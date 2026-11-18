@@ -94,6 +94,19 @@ def check_spec(root: Path, reporter: Reporter):
         elif filepath.stat().st_size == 0:
             reporter.error("SPEC", f"Specification document is empty: {filename}")
 
+    # Check .context.json exists and is valid JSON
+    context_file = spec_dir / ".context.json"
+    if not context_file.exists():
+        reporter.warning("SPEC", "Missing machine-readable '.spec/.context.json' Project DNA manifest for zero-amnesia Turn-1 recall.")
+    elif context_file.stat().st_size == 0:
+        reporter.error("SPEC", "Project DNA manifest '.spec/.context.json' is empty.")
+    else:
+        try:
+            import json
+            json.loads(context_file.read_text(encoding="utf-8"))
+        except Exception as e:
+            reporter.error("SPEC", f"Corrupt JSON in '.spec/.context.json': {str(e)}")
+
     # Check 6_UI_UX_DESIGN.md has UX Laws documented
     ui_spec = spec_dir / "6_UI_UX_DESIGN.md"
     if ui_spec.exists() and ui_spec.stat().st_size > 0:

@@ -26,10 +26,10 @@ When brainstorming, planning, or building within a project repository, ensure `<
 - **The Turn-1 Project Bootstrap Handshake (Anti-Amnesia Protocol)**:
   - When opening ANY new chat or resuming in an existing project workspace, the agent MUST immediately inspect `<project-root>/.spec/`.
   - On Turn 1, the agent MUST read:
-    1. `1_PRD.md` (Product identity, scope, non-goals).
-    2. `2_TRD.md` (Stack boundaries, architecture invariants).
+    1. `.context.json` (The Machine-Readable Project DNA: Archetype, exact OKLCH tokens, routes, and core security invariants).
+    2. `1_PRD.md` (Product identity, scope, non-goals).
     3. `8_DECISION_LEDGER.md` (Past rulings and schema evolution).
-  - The agent begins its response by acknowledging loaded state in 1 concise line: `[Context Handshake]: Loaded <ProjectName> spec (8 docs, N ledger entries synced). Ready.`
+  - The agent begins its response by acknowledging loaded state in 1 concise line: `[Context Handshake]: Loaded <ProjectName> DNA (.context.json + 8 spec docs, N ledger entries synced). Ready.`
   - Answering feature requests or writing code in an existing project without executing this Handshake is considered an operational failure.
 
 ---

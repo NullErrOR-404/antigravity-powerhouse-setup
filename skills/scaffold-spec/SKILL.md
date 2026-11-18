@@ -18,18 +18,19 @@ Scaffolds the mandatory 8-document living specification matrix inside `<project-
 1. Automatically on turn 1 of any new project or when planning a client system.
 2. Manually via `/scaffold-spec [project-name]` or "init spec".
 
-## The 8 Documents Scaffolded
+## The 8 Living Documents + Project DNA Manifest
 
 Ensure `.spec/` exists and contains:
 
-1. `1_PRD.md` — Product Requirements, Scope, Target Audience Psychographics, Niche Market Model, Core User Stories, and Non-Goals.
-2. `2_TRD.md` — Technical Architecture, Chosen Tech Stack, Scalability Profile (Target Concurrency), Connection Pooling, Error Boundaries, Invariants, and Tradeoffs.
-3. `3_DATABASE_SCHEMA.md` — Tables, Columns, Foreign Keys, Indexes, Relations, and Migration Logs.
-4. `4_BACKEND_SCHEMA.md` — API Endpoints, Payloads, Query Params, Auth Boundaries, and Status Codes.
-5. `5_USER_FLOW.md` — Step-by-step user journeys, interaction state machines, edge cases, and graceful failure recovery.
-6. `6_UI_UX_DESIGN.md` — Niche-Specific Laws of UX (Jakob's, Hick's, Miller's, Fitts's, Von Restorff, Proximity, Similarity, Common Region), Color Tokens (OKLCH), Typography Scale, 4px Grid, Craft Floor bans, and Motion rules.
-7. `7_IMPLEMENTATION_PLAN.md` — 15-minute decomposed task graph with explicit blocking dependencies.
-8. `8_DECISION_LEDGER.md` — Chronological log of architecture rulings, schema adjustments, and ADR entries.
+1. `.context.json` — **Machine-Readable Project DNA Manifest**. High-density, instant Turn-1 index holding project archetype, exact OKLCH tokens, tech stack, active routes, and non-negotiable security invariants.
+2. `1_PRD.md` — Product Requirements, Scope, Target Audience Psychographics, Niche Market Model, Core User Stories, and Non-Goals.
+3. `2_TRD.md` — Technical Architecture, Chosen Tech Stack, Scalability Profile (Target Concurrency), Connection Pooling, Error Boundaries, Invariants, and Tradeoffs.
+4. `3_DATABASE_SCHEMA.md` — Tables, Columns, Foreign Keys, Indexes, Relations, and Migration Logs.
+5. `4_BACKEND_SCHEMA.md` — API Endpoints, Payloads, Query Params, Auth Boundaries, and Status Codes.
+6. `5_USER_FLOW.md` — Step-by-step user journeys, interaction state machines, edge cases, and graceful failure recovery.
+7. `6_UI_UX_DESIGN.md` — Niche-Specific Laws of UX (Jakob's, Hick's, Miller's, Fitts's, Von Restorff, Proximity, Similarity, Common Region), Color Tokens (OKLCH), Typography Scale, 4px Grid, Craft Floor bans, and Motion rules.
+8. `7_IMPLEMENTATION_PLAN.md` — 15-minute decomposed task graph with explicit blocking dependencies.
+9. `8_DECISION_LEDGER.md` — Chronological log of architecture rulings, schema adjustments, and ADR entries.
 
 ## Continuous Synchronization Protocol
 - Once scaffolded, the agent reads these files before writing code.
