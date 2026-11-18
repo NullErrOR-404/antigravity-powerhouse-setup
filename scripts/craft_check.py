@@ -183,6 +183,14 @@ def scan_code_files(root: Path, reporter: Reporter):
                 if re.search(r"\$(?:100|99|50|10)\.00\b", raw):
                     reporter.warning("COPY", "Generic round dummy pricing ($100.00) detected. Use realistic domain data and edge-case numbers.", str(path), idx)
 
+                # 11. Anti-Legacy: Naked unstyled HTML controls (<button> or <select> without class)
+                if re.search(r"<(?:button|select|input)(?![^>]*\b(?:class|className)=)[^>]*>", raw):
+                    reporter.error("LEGACY_UI", "Naked unstyled HTML control detected without class/className styling.", str(path), idx)
+
+                # 12. Anti-Legacy: Pulsing dots or decorative status ping pills
+                if re.search(r"\banimate-(?:ping|pulse)\b", raw) and ("w-2" in raw or "w-3" in raw or "h-2" in raw or "h-3" in raw):
+                    reporter.warning("AI_SLOP", "Decorative pulsing dot detected (AI slop trope). Use calm, purposeful status indicators.", str(path), idx)
+
 
 def audit_pattern(root: Path, pattern: str, reporter: Reporter):
     """Exhaustive multi-file regex inventory for codebase-wide refactors."""
